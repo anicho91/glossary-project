@@ -1,6 +1,6 @@
 package com.company.glossaryservice.util.feign;
 
-import com.company.glossaryservice.dto.GlossaryViewModel;
+import com.company.glossaryservice.dto.Definition;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,12 +13,12 @@ import java.util.List;
 public interface DefinitionClient {
 
     @GetMapping(value = "/definition/term/{term}")
-    public List getDefintionForTerm(@PathVariable String term);
+    public List<Definition> getDefintionForTerm(@PathVariable String term);
 
-    @PostMapping(value = "/defintion")
-    public GlossaryViewModel addDefinition(@RequestBody GlossaryViewModel gvm);
+    @PostMapping(value = "/definition")
+    public Definition addDefinition(@RequestBody Definition definition);
 
-    @GetMapping(value = "/defintion/{id}")
-    public GlossaryViewModel getDefinition(@PathVariable int id);
+    @GetMapping(value = "/definition/{id}")
+    public Definition getDefinition(@PathVariable int id);
 
 }
