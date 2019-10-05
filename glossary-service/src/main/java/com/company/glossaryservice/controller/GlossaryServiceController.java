@@ -1,6 +1,6 @@
 package com.company.glossaryservice.controller;
 
-import com.company.glossaryservice.dto.GlossaryViewModel;
+import com.company.glossaryservice.dto.Definition;
 import com.company.glossaryservice.service.ServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,14 +22,14 @@ public class GlossaryServiceController {
     //post
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public GlossaryViewModel createDefinition(@RequestBody GlossaryViewModel gsvm){
-        return service.addTermDefintion(gsvm);
+    public Definition createDefinition(@RequestBody Definition definition){
+        return service.addTermDefintion(definition);
     }
 
     //get
     @GetMapping(value = "/term/{term}")
     @ResponseStatus(HttpStatus.FOUND)
-    public GlossaryViewModel getDefinitionsByTerm(@PathVariable String term){
+    public List<Definition> getDefinitionsByTerm(@PathVariable String term){
         return service.getTermDefinitions(term);
     }
 }

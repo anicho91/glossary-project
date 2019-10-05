@@ -1,18 +1,17 @@
 package com.company.glossaryservice.dto;
 
-import java.util.List;
 import java.util.Objects;
 
-public class GlossaryViewModel {
+public class Definition {
 
     private int id;
     private String term;
-    private List<String> definition;
+    private String definition;
 
-    public GlossaryViewModel() {
+    public Definition() {
     }
 
-    public GlossaryViewModel(int id, String term, List<String> definition) {
+    public Definition(int id, String term, String definition) {
         this.id = id;
         this.term = term;
         this.definition = definition;
@@ -34,11 +33,11 @@ public class GlossaryViewModel {
         this.term = term;
     }
 
-    public List<String> getDefinition() {
+    public String getDefinition() {
         return definition;
     }
 
-    public void setDefinition(List<String> definition) {
+    public void setDefinition(String definition) {
         this.definition = definition;
     }
 
@@ -46,7 +45,7 @@ public class GlossaryViewModel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GlossaryViewModel that = (GlossaryViewModel) o;
+        Definition that = (Definition) o;
         return id == that.id &&
                 Objects.equals(term, that.term) &&
                 Objects.equals(definition, that.definition);

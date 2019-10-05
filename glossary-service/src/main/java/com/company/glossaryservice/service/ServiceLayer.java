@@ -1,46 +1,60 @@
 package com.company.glossaryservice.service;
 
-import com.company.glossaryservice.dto.GlossaryViewModel;
+import com.company.glossaryservice.dto.Definition;
 import com.company.glossaryservice.util.feign.DefinitionClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class ServiceLayer {
 
-    GlossaryViewModel gvm;
+//    Definition gvm;
 
     DefinitionClient client;
 
     @Autowired
-    public ServiceLayer(GlossaryViewModel gvm, DefinitionClient client) {
-        this.gvm = gvm;
+    public ServiceLayer(DefinitionClient client) {
         this.client = client;
     }
 
-
-
-
+    // ======================================================
 
 
     /*
-    Add Method
+    The definition must be family friendly. It cannot contain any
+    of the following words (case insensitive), however these
+    words may exist within other words
+    - darn
+    - heck (however, heckler and checkmate are allowed, for example)
+    - drat (however, dehydrated is allowed, for example)
+    - jerk
+    - butt (however, buttress is allowed, for example)
 
-    Get List
      */
 
-    public GlossaryViewModel addTermDefintion(GlossaryViewModel gvm) {
+    public Definition addTermDefintion(Definition definition) {
         // grab id from client first
-//        client.getDefinition(gvm.getId());
-        if (client.getDefintionForTerm(gvm.getTerm()) != null) {
-//            client
-            return null;
+        List<String> badWordList = new ArrayList<>();
+        badWordList.add("darn");
+        badWordList.add("heck");
+        badWordList.add("drat");
+        badWordList.add("jerk");
+        badWordList.add("butt");
+        if (badWordList.contains(definition.getDefinition())) {
+            throw new IllegalArgumentException("The definition must be family friendly");
+        } else {
+            return client.addDefinition(definition);
         }
-        // if statement
-        return null;
+
     }
 
-    public GlossaryViewModel getTermDefinitions(String term) {
-        return null;
+    // ======================================================
+
+    public List<Definition> getTermDefinitions(String term) {
+
+        return client.getDefintionForTerm(term);
     }
 }

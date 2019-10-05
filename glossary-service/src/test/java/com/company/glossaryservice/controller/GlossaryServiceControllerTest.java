@@ -1,6 +1,6 @@
 package com.company.glossaryservice.controller;
 
-import com.company.glossaryservice.dto.GlossaryViewModel;
+import com.company.glossaryservice.dto.Definition;
 import com.company.glossaryservice.service.ServiceLayer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -47,15 +47,15 @@ public class GlossaryServiceControllerTest {
         List<String> gvmList = new ArrayList<>();
         gvmList.add("test1");
         gvmList.add("test2");
-        GlossaryViewModel gvm = new GlossaryViewModel();
-        gvm.setDefinition(gvmList);
+        Definition gvm = new Definition();
+        gvm.setDefinition("Definition");
         gvm.setTerm("Test3");
 
         String inputJson = mapper.writeValueAsString(gvm);
 
-        GlossaryViewModel outGvm = new GlossaryViewModel();
+        Definition outGvm = new Definition();
         outGvm.setId(1);
-        outGvm.setDefinition(gvmList);
+        outGvm.setDefinition("Definition");
         outGvm.setTerm("Test3");
 
         String outputJson = mapper.writeValueAsString(outGvm);
@@ -71,19 +71,33 @@ public class GlossaryServiceControllerTest {
 
     @Test
     public void getDefinitionsByTerm() throws Exception {
-        List<String> gvmList = new ArrayList<>();
-        gvmList.add("test1");
-        gvmList.add("test2");
-     GlossaryViewModel outGvm = new GlossaryViewModel();
-        outGvm.setId(1);
-        outGvm.setDefinition(gvmList);
+        Definition inDef = new Definition();
+        inDef.setId(1);
+        inDef.setDefinition("Definition");
+        inDef.setTerm("Test3");
+
+
+//        List<String> gvmList = new ArrayList<>();
+//        gvmList.add("test1");
+//        gvmList.add("test2");
+     Definition outGvm = new Definition();
+     outGvm.setId(2);
+//        outGvm.setId(1);
+        outGvm.setDefinition("Definition");
         outGvm.setTerm("Test3");
 
+        List<Definition> dList = new ArrayList<>();
+        dList.add(inDef);
+        dList.add(outGvm);
 
+        when(serviceLayer.getTermDefinitions("Test3")).thenReturn(dList);
 
-        Optional<GlossaryViewModel> returnVal = Optional.of(outGvm);
-        String outputjson = mapper.writeValueAsString(outGvm);
-        when(serviceLayer.getTermDefinitions("Test3")).thenReturn(returnVal.get());
+        List<Definition> listChecker = new ArrayList<>();
+        listChecker.addAll(dList);
+
+//        Definition returnVal = outGvm;
+        String outputjson = mapper.writeValueAsString(listChecker);
+//        when(serviceLayer.getTermDefinitions("Test3")).thenReturn(gvmList);
 
         this.mockMvc.perform(get("/glossary/term/Test3"))
                 .andDo(print())
