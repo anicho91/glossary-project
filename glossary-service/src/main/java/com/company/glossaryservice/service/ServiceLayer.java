@@ -24,20 +24,15 @@ public class ServiceLayer {
 
 
     /*
-<<<<<<< HEAD
-        The definition must be family friendly. It cannot contain any
-        of the following words (case insensitive), however these
-        words may exist within other words
+    The definition must be family friendly. It cannot contain any
+    of the following words (case insensitive), however these
+    words may exist within other words
     - darn
     - heck (however, heckler and checkmate are allowed, for example)
     - drat (however, dehydrated is allowed, for example)
     - jerk
     - butt (however, buttress is allowed, for example)
-=======
-    Add Method
 
-    Get List
->>>>>>> master
      */
 
     public Definition addTermDefintion(Definition definition) {
