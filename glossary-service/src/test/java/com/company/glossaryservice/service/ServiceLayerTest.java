@@ -8,9 +8,6 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ServiceLayerTest {
@@ -23,14 +20,14 @@ public class ServiceLayerTest {
     @Before
     public void setUp() throws Exception {
         setUpServiceMock();
-        setUpClientMock();
+//        setUpClientMock();
 
         service = new ServiceLayer(gvm, client);
     }
 
     // HELPER METHODS
     private void setUpServiceMock() {
-        gvm = mock(gvm.class)
+//        gvm = mock(gvm.class);
     }
 
     @Test
